@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API test</title>
+</head>
+<body>
+    <h3>Cool Rooms</h3>
+    <div class="rooms-container">
+
+    </div>
+</body>
+<script>
+    let Rooms = document.querySelector(
+        '.rooms-container')
+
+    let getRooms = async () => {
+        let rooms = await fetch('http://127.0.0.1:8000/api/rooms/')
+        rooms = await rooms.json()
+        console.log('Rooms',rooms)
+
+        for (let i=0; i < rooms.length;i++)
+        {
+            let room = rooms[i];
+            let row = `<div><h3>${room.name}</h3></div>`;
+
+            Rooms.innerHTML += row;
+        }
+    }
+
+    getRooms()
+</script>
+</html>
